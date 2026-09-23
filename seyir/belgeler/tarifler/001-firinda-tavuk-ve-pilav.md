@@ -4,11 +4,11 @@ kod: TRF-001
 baslik: "Fırında Soslu Baget ve Tereyağlı Pilav"
 durum: kabul
 tarih: 2026-09-23
-surum: 10
+surum: 11
 emoji: "🍗"
 kisi: 2
 sure: 95
-ozet: "Maden suyu ve salçalı sosa yatırılmış 8 baget; patates, soğan, kapya biber ve domatesle yağlı kağıt serili tepside, pişerken sos sürülerek. Yanında tereyağlı pirinç pilavı. Alt-üst fanlı fırın, 180°C."
+ozet: "Maden suyu ve salçalı sosa yatırılmış 8 baget; patates, soğan ve domatesle yağlı kağıt serili tepside, pişerken sos sürülerek. Yanında tereyağlı pirinç pilavı. Alt-üst fanlı fırın, 180°C."
 ---
 
 ## 🍗 Soslu Baget
@@ -21,7 +21,6 @@ ozet: "Maden suyu ve salçalı sosa yatırılmış 8 baget; patates, soğan, kap
 - 8 adet | tavuk baget (~950 g)
 - 2 adet | orta boy patates
 - 1 adet | orta boy kuru soğan
-- 1 adet | kapya biber
 - 1 adet | orta boy domates
 - ¼ demet | maydanoz
 - ⅔ su bardağı | sade maden suyu
@@ -95,12 +94,10 @@ ozet: "Maden suyu ve salçalı sosa yatırılmış 8 baget; patates, soğan, kap
 7. 🥔 Sebzeleri doğra — Fırın ısınırken.
    + 2 adet | patates
    + 1 adet | kuru soğan
-   + 1 adet | kapya biber
    + 1 adet | domates
-   * 3 dk | Patatesleri soy, yıka, her birini uzunlamasına 8 dilime böl.
-   * 2 dk | Soğanı soy, 4'e böl, katlarını ayır.
-   * 1 dk | Biberin sapını ve çekirdeğini çıkar, 6 parçaya böl.
-   * 1 dk | Domatesi 6'ya böl, ayrı bir tabağa koy.
+   * 3 dk | Patatesleri soy, yıka, uzunlamasına 8 elma dilimine böl; dilimin en kalın yeri 15 mm olsun, daha kalın olursa ortası çiğ kalır.
+   * 2 dk | Soğanı soy, 4'e böl, katlarını ayır; her kat yaklaşık 10 mm kalınlığında olur.
+   * 1 dk | Domatesi 6'ya böl (her dilim yaklaşık 20 mm), ayrı bir tabağa koy.
 8. 🍗 Bagetleri kontrol et — Sosa yatırdıktan 30 dk sonra.
    * 30 sn | En kalın yerine bastır. Yumuşaksa 9. adıma geç; hâlâ sertse 15 dk daha beklet.
 9. 🍗 Tepsiye diz
@@ -111,7 +108,7 @@ ozet: "Maden suyu ve salçalı sosa yatırılmış 8 baget; patates, soğan, kap
    + 8 adet | soslu baget
    + 7. adımdaki | sebzeler
    * 1 dk | Bagetleri kaptan alıp bir tabağa koy; sos kapta kalsın.
-   * 1 dk | Patates, soğan ve biberi kapta kalan sosa ve 1 yemek kaşığı zeytinyağına bula.
+   * 1 dk | Patates ve soğanı kapta kalan sosa ve 1 yemek kaşığı zeytinyağına bula.
    * 30 sn | Tepsiye yağlı kağıdı ser, kenarlarını tepsinin iç duvarlarına kaldır.
    * 1 dk | Sebzeleri kağıdın üstüne tek kat yay, domatesleri aralara koy.
    * 1 dk | 8 bageti aralarında boşluk kalacak şekilde, derisi üstte, sebzelerin üstüne diz.
@@ -164,7 +161,7 @@ ozet: "Maden suyu ve salçalı sosa yatırılmış 8 baget; patates, soğan, kap
 20. 🍗 Dinlendir, maydanozu serp
    + ¼ demet | maydanoz
    * 30 sn | Fırını kapat, tepsiyi çıkar.
-   * 5 dk | Tepsiyi dinlendir; bu sırada maydanozu yıka, ince kıy.
+   * 5 dk | Tepsiyi dinlendir; bu sırada maydanozu yıka, 2–3 mm ince kıy.
    * 30 sn | Maydanozu bagetlerin ve sebzelerin üstüne serp.
 21. 🍽️ Servis
    * 30 sn | Pilavın altını üstüne getir.
