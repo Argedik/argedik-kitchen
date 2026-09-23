@@ -59,7 +59,6 @@ th { font-size: 12px; font-weight: 700; color: var(--soluk); }
 .adim-bas .sure { font-weight: 600; color: var(--vurgu); font-size: 13px; margin-left: 4px; }
 .ipucu { color: var(--soluk); font-size: 13.5px; }
 .kullan { font-size: 13.5px; margin-top: 2px; }
-.kullan b { color: var(--soluk); font-weight: 600; }
 .eylemler { margin-top: 2px; }
 .eylemler td { border: 0; padding: 1px 4px 1px 0; }
 .eylemler .miktar { color: var(--vurgu); font-weight: 600; font-size: 13.5px; }
@@ -79,17 +78,31 @@ function sureYaz(sn) {
 // Zaman çizelgesi grubu: miktar sütunu dakika ise ("0. dk", "25–35. dk").
 const cizelgeMi = (g) => g.tur === "liste" && g.ogeler.every((o) => /dk$/.test(o.miktar));
 
-// Bütün bölümlerin malzeme listeleri tek tabloda, bölüm adı ara satır olarak.
+// "### Baharatlar" grupları bütün bölümlerden toplanır: tabloda tek grup, adımlarda 🧂 satırı.
+const baharatGrubu = (g) => g.tur === "liste" && g.baslik === "Baharatlar";
+const yalin = (ad) => ad.replace(/\(.*?\)/g, "").trim().toLocaleLowerCase("tr");
+let baharatlar = new Set();
+
+const satir = (o) => `<tr><td class="miktar">${kacis(o.miktar)}</td><td>${kacis(o.ad)}</td></tr>`;
+const grupSatiri = (ad) => `<tr class="grup"><td colspan="2">${kacis(ad)}</td></tr>`;
+
+// Bütün bölümlerin malzemeleri tek tabloda, bölüm adı ara satır olarak; baharatlar en sonda tek grup.
 function malzemeTablosu(t) {
   const satirlar = t.bolumler.flatMap((b) => {
-    const ogeler = b.gruplar.filter((g) => g.tur === "liste" && !cizelgeMi(g)).flatMap((g) => g.ogeler);
-    if (!ogeler.length) return [];
-    return [
-      `<tr class="grup"><td colspan="2">${kacis(b.baslik)}</td></tr>`,
-      ...ogeler.map((o) => `<tr><td class="miktar">${kacis(o.miktar)}</td><td>${kacis(o.ad)}</td></tr>`),
-    ];
+    const ogeler = b.gruplar.filter((g) => g.tur === "liste" && !cizelgeMi(g) && !baharatGrubu(g)).flatMap((g) => g.ogeler);
+    return ogeler.length ? [grupSatiri(b.baslik), ...ogeler.map(satir)] : [];
   });
+  const baharat = t.bolumler.flatMap((b) => b.gruplar.filter(baharatGrubu).flatMap((g) => g.ogeler));
+  if (baharat.length) satirlar.push(grupSatiri("🧂 Baharatlar"), ...baharat.map(satir));
   return satirlar.length ? `<h2>Malzemeler</h2><table class="malz">${satirlar.join("")}</table>` : "";
+}
+
+function kullanilacaklar(a) {
+  const liste = (ms) => ms.map((m) => `${kacis(m.miktar)} ${kacis(m.ad)}`).join(" · ");
+  const bah = a.malzemeler.filter((m) => baharatlar.has(yalin(m.ad)));
+  const diger = a.malzemeler.filter((m) => !baharatlar.has(yalin(m.ad)));
+  return (diger.length ? `<p class="kullan">🥘 ${liste(diger)}</p>` : "") +
+    (bah.length ? `<p class="kullan">🧂 ${liste(bah)}</p>` : "");
 }
 
 function adimlar(b) {
@@ -99,7 +112,7 @@ function adimlar(b) {
       <li class="adim">
         <p class="adim-bas">${i + 1}. ${kacis(a.baslik)}${a.saniye ? `<span class="sure">${sureYaz(a.saniye)}</span>` : ""}</p>
         ${a.metin ? `<p class="ipucu">${kacis(a.metin)}</p>` : ""}
-        ${a.malzemeler.length ? `<p class="kullan"><b>Kullan:</b> ${a.malzemeler.map((m) => `${kacis(m.miktar)} ${kacis(m.ad)}`).join(" · ")}</p>` : ""}
+        ${kullanilacaklar(a)}
         ${a.eylemler.length ? `<table class="eylemler">${a.eylemler.map((e) =>
           `<tr><td class="miktar">${sureYaz(e.saniye)}</td><td>${kacis(e.metin)}</td></tr>`).join("")}</table>` : ""}
       </li>`).join("")}
@@ -115,6 +128,7 @@ function cizelge(b) {
 }
 
 function tarif(t) {
+  baharatlar = new Set(t.bolumler.flatMap((b) => b.gruplar.filter(baharatGrubu).flatMap((g) => g.ogeler.map((o) => yalin(o.ad)))));
   const notlar = t.bolumler.flatMap((b) => b.notlar.filter(Boolean));
   return `<article>
     <h1>${kacis(t.emoji)} ${kacis(t.baslik)}</h1>

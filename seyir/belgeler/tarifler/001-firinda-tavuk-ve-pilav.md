@@ -4,7 +4,7 @@ kod: TRF-001
 baslik: "Fırında Soslu Baget ve Tereyağlı Pilav"
 durum: kabul
 tarih: 2026-09-23
-surum: 7
+surum: 8
 emoji: "🍗"
 kisi: 2
 sure: 102
@@ -28,17 +28,19 @@ ozet: "Maden suyu ve salçalı sosa yatırılmış bagetler; patates, soğan, ka
 - ½ su bardağı | sade maden suyu
 - 5 yemek kaşığı | zeytinyağı (3'ü marine sosuna, 1'i sebzelere, 1'i sürme sosuna)
 - 1 tepeleme + 1 silme yemek kaşığı | biber salçası (tepelemesi marine sosuna, silmesi sürme sosuna)
-- 1 silme tatlı kaşığı | tuz
-- 1 silme tatlı kaşığı | pul biber (+1 tutam sürme sosuna)
-- 1 silme çay kaşığı | kimyon
-- 1 silme çay kaşığı | kekik
-- 1 silme çay kaşığı | toz kırmızı biber (tatlı)
-- ½ silme çay kaşığı | karabiber
 - ½ su bardağı | sıcak su (tepsiye)
 - 2 yemek kaşığı | sıcak su (sürme sosuna)
 - 1 parça | yağlı kağıt (tepsinin tabanı kadar)
 - 1 adet | fırın tepsisi
 - 2 tepeleme yemek kaşığı | rendelenmiş kaşar (isteğe bağlı, patateslerin üstüne)
+
+### Baharatlar
+- 1 silme tatlı kaşığı | tuz (marine sosuna)
+- 1 silme tatlı kaşığı + 1 tutam | pul biber (tutamı sürme sosuna)
+- 1 silme çay kaşığı | kimyon
+- 1 silme çay kaşığı | kekik
+- 1 silme çay kaşığı | toz kırmızı biber (tatlı)
+- ½ silme çay kaşığı | karabiber
 
 ### Adımlar
 1. Marine sosunu hazırla
@@ -130,9 +132,11 @@ ozet: "Maden suyu ve salçalı sosa yatırılmış bagetler; patates, soğan, ka
 - 1 tepeleme yemek kaşığı | tereyağı
 - 1 tatlı kaşığı | zeytinyağı
 - 1,5 su bardağı | sıcak su (tavuk suyu olursa daha iyi)
-- ½ silme tatlı kaşığı | tuz
-- 1 silme çay kaşığı | tuz (ıslatma suyu için)
 - 1 yaprak | kağıt havlu
+
+### Baharatlar
+- ½ silme tatlı kaşığı | tuz (pilav suyuna)
+- 1 silme çay kaşığı | tuz (ıslatma suyuna)
 
 ### Adımlar
 1. Pirinci ıslat
