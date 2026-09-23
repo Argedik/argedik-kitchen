@@ -123,6 +123,8 @@ h3 { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: u
   margin: 20px 0 0; padding: 14px 16px; border-radius: 14px;
   background: var(--vurgu-yumusak); font-size: 15px;
 }
+.not p { margin: 0; }
+.not p + p { margin-top: 8px; }
 
 .malzeme-liste { list-style: none; margin: 0; padding: 0; background: var(--yuzey); border: 1px solid var(--cizgi); border-radius: 16px; overflow: hidden; }
 .malzeme-liste li + li { border-top: 1px solid var(--cizgi); }
@@ -213,6 +215,8 @@ let durum = depo.al("seyir.mutfak.isaret", {});   // { "<slug>": { "m:<anahtar>"
 let sayaclar = depo.al("seyir.mutfak.sayac", []); // [{ id, ad, bitis, sure }]
 let sekme = depo.al("seyir.mutfak.sekme", {});    // { "<slug>": bolumIndex }
 
+// İşaretler tarifin sürümüne bağlıdır: tarif güncellenince eski tikler yeni adımlara kaymaz.
+const iz = (t) => `${t.slug}@${t.surum ?? 1}`;
 const isaretli = (slug, k) => !!durum[slug]?.[k];
 function degistir(slug, k) {
   durum[slug] = durum[slug] || {};
@@ -277,7 +281,7 @@ function tarifSayfasi(t) {
     <nav class="sekmeler" role="tablist">
       ${t.bolumler.map((x, i) => `<button class="sekme" role="tab" aria-selected="${i === secili}" data-sekme="${i}">${kacis(x.baslik)}</button>`).join("")}
     </nav>
-    ${b.notlar.length ? `<div class="not">${b.notlar.map(kacis).join("<br>")}</div>` : ""}
+    ${b.notlar.length ? `<div class="not">${b.notlar.filter(Boolean).map((n) => `<p>${kacis(n)}</p>`).join("")}</div>` : ""}
     ${b.gruplar.map((g, gi) => grupCiz(t, secili, g, gi)).join("")}
     <button class="sifirla" data-sifirla>İşaretleri sıfırla</button>`;
 
@@ -289,7 +293,7 @@ function tarifSayfasi(t) {
       window.scrollTo({ top: $(".sekmeler").offsetTop - 56 });
     }));
   $("#ana").querySelectorAll("[data-isaret]").forEach((d) =>
-    d.addEventListener("click", () => { degistir(t.slug, d.dataset.isaret); tarifSayfasi(t); }));
+    d.addEventListener("click", () => { degistir(iz(t), d.dataset.isaret); tarifSayfasi(t); }));
   $("#ana").querySelectorAll("[data-baslat]").forEach((d) =>
     d.addEventListener("click", () => {
       const [bi, gi, oi] = d.dataset.baslat.split(".").map(Number);
@@ -299,7 +303,7 @@ function tarifSayfasi(t) {
     }));
   $("[data-sifirla]").addEventListener("click", () => {
     if (!confirm("Bu tarifteki bütün işaretler kaldırılsın mı?")) return;
-    delete durum[t.slug];
+    delete durum[iz(t)];
     depo.yaz("seyir.mutfak.isaret", durum);
     tarifSayfasi(t);
   });
@@ -310,7 +314,7 @@ function grupCiz(t, bi, g, gi) {
   if (g.tur === "adim") {
     return `<h3>${kacis(g.baslik)}</h3><ol class="adimlar">${g.ogeler.map((a, oi) => {
       const k = anahtar(oi);
-      const bitti = isaretli(t.slug, "a:" + k);
+      const bitti = isaretli(iz(t), "a:" + k);
       const calisan = sayaclar.some((s) => s.id === `${t.slug}:${k}`);
       return `<li class="adim${bitti ? " bitti" : ""}${calisan ? " caliyor" : ""}">
         <div class="adim-bas">
@@ -335,7 +339,7 @@ function grupCiz(t, bi, g, gi) {
   }
   return `<h3>${kacis(g.baslik)}</h3><ul class="malzeme-liste">${g.ogeler.map((o, oi) => {
     const k = "m:" + anahtar(oi);
-    const var_ = isaretli(t.slug, k);
+    const var_ = isaretli(iz(t), k);
     return `<li><button class="malzeme" data-isaret="${k}" aria-pressed="${var_}">
       <span class="kutu">✓</span>
       <span class="yazi"><span class="miktar">${kacis(o.miktar)}</span> <span class="ad">${kacis(o.ad)}</span></span>
