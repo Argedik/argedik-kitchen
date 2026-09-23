@@ -14,8 +14,8 @@ const PORT = Number(process.env.PORT) || usul.port || 5280;
 const tirnaksiz = (v) => v.replace(/^["'](.*)["']$/, "$1");
 const deger = (v) => (/^\d+$/.test(v) ? Number(v) : tirnaksiz(v));
 
-// "20–25 dk" → 25: sayaç üst sınırdan kurulur, erken kontrol metinde yazılıdır.
-const dakika = (s) => Math.max(...(s.match(/\d+/g) ?? ["0"]).map(Number));
+// "20–25 dk" → 1500 sn: sayaç üst sınırdan kurulur, erken kontrol metinde yazılıdır. "30 sn" → 30.
+const saniye = (s) => Math.max(...(s.match(/\d+/g) ?? ["0"]).map(Number)) * (/sn/.test(s) ? 1 : 60);
 
 function ayristir(metin, slug) {
   const [, on = "", govde = metin] = metin.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/) ?? [];
@@ -41,9 +41,16 @@ function ayristir(metin, slug) {
     } else if ((m = satir.match(/^### (.+)/))) {
       grup = { baslik: m[1].trim(), tur: "liste", ogeler: [] };
       bolum.gruplar.push(grup);
-    } else if (grup && (m = satir.match(/^\d+\.\s+(.+?)\s*\(([^)]*dk)\)\s*[—-]\s*(.+)/))) {
+    } else if (grup && (m = satir.match(/^\d+\.\s+(.+?)(?:\s*\(([^)]*(?:dk|sn))\))?(?:\s*[—-]\s*(.+))?$/))) {
+      // Adım: "1. Başlık" + isteğe bağlı "(N dk)" ve "— ipucu". Süre verilmezse eylemlerin toplamıdır.
       grup.tur = "adim";
-      grup.ogeler.push({ baslik: m[1], sureMetin: m[2], sure: dakika(m[2]), metin: m[3] });
+      grup.ogeler.push({ baslik: m[1], saniye: m[2] ? saniye(m[2]) : 0, metin: m[3] ?? "", malzemeler: [], eylemler: [] });
+    } else if (grup?.tur === "adim" && (m = satir.match(/^\s+\+\s+(.+?)\s*\|\s*(.+)/))) {
+      grup.ogeler.at(-1).malzemeler.push({ miktar: m[1], ad: m[2] });
+    } else if (grup?.tur === "adim" && (m = satir.match(/^\s+\*\s+(.+?)\s*\|\s*(.+)/))) {
+      const adim = grup.ogeler.at(-1);
+      adim.eylemler.push({ sureMetin: m[1], saniye: saniye(m[1]), metin: m[2] });
+      adim.saniye = adim.eylemler.reduce((t, e) => t + e.saniye, 0);
     } else if (grup && (m = satir.match(/^- (.+?)\s*\|\s*(.+)/))) {
       grup.ogeler.push({ miktar: m[1], ad: m[2] });
     }

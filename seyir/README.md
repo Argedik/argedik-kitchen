@@ -15,5 +15,8 @@ Açılış: `http://localhost:5280` — telefondan aynı Wi-Fi'da `http://<bilgi
 - `## Bölüm` → sitede bir sekme (ör. yemek, pilav, zaman çizelgesi).
 - `> not` → bölümün üstündeki uyarı kutusu.
 - `### Grup` + `- miktar | malzeme` → işaretlenebilir malzeme listesi.
-- `### Adımlar` + `1. Başlık (N dk) — açıklama` → sayaçlı adım kartı.
+- `### Adımlar` + `1. Başlık — ipucu` → adım kartı. Altında girintili satırlar:
+  - `   + miktar | malzeme` → o adımda kullanılacaklar,
+  - `   * N dk | eylem` (ya da `30 sn`) → süreli eylem; her birinin kendi sayacı var,
+    adımın toplam süresi eylemlerden hesaplanır. Eylemsiz adımda süre `(N dk)` ile başlığa yazılır.
 - Miktarı `… dk` ile biten liste (`- 20. dk | …`) zaman çizelgesi olarak çizilir.
