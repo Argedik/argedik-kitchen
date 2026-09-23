@@ -43,7 +43,7 @@ h1 { font-size: 20px; line-height: 1.25; margin: 4px 0 2px; }
 h2 { font-size: 16px; margin: 16px 0 4px; padding-bottom: 2px; border-bottom: 2px solid var(--vurgu); }
 p { margin: 0; }
 .bilgi { color: var(--soluk); font-size: 13.5px; }
-.notlar { margin: 8px 0 0; padding: 0 0 0 16px; font-size: 13.5px; color: var(--soluk); }
+.notlar { margin: 0; padding: 0 0 0 16px; font-size: 13.5px; color: var(--soluk); }
 .notlar li { margin: 2px 0; }
 
 table { width: 100%; border-collapse: collapse; }
@@ -62,6 +62,11 @@ th { font-size: 12px; font-weight: 700; color: var(--soluk); }
 .eylemler { margin-top: 2px; }
 .eylemler td { border: 0; padding: 1px 4px 1px 0; }
 .eylemler .miktar { color: var(--vurgu); font-weight: 600; font-size: 13.5px; }
+.simdi { background: var(--serit); border-left: 3px solid var(--vurgu); padding: 6px 8px; }
+.etiket { font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--vurgu); }
+.yapilanlar { margin-top: 16px; border-top: 2px solid var(--cizgi); }
+.yapilanlar summary { padding: 8px 0; font-weight: 700; cursor: pointer; }
+.yapilanlar .adim { opacity: .6; }
 .bos { color: var(--soluk); padding: 24px 0; text-align: center; }
 </style>
 </head>
@@ -105,18 +110,27 @@ function kullanilacaklar(a) {
     (bah.length ? `<p class="kullan">🧂 ${liste(bah)}</p>` : "");
 }
 
-function adimlar(b) {
-  return b.gruplar.filter((g) => g.tur === "adim").map((g) => `
-    <h2>${kacis(b.baslik)}</h2>
-    <ol class="adimlar">${g.ogeler.map((a, i) => `
-      <li class="adim">
-        <p class="adim-bas">${i + 1}. ${kacis(a.baslik)}${a.saniye ? `<span class="sure">${sureYaz(a.saniye)}</span>` : ""}</p>
-        ${a.metin ? `<p class="ipucu">${kacis(a.metin)}</p>` : ""}
-        ${kullanilacaklar(a)}
-        ${a.eylemler.length ? `<table class="eylemler">${a.eylemler.map((e) =>
-          `<tr><td class="miktar">${sureYaz(e.saniye)}</td><td>${kacis(e.metin)}</td></tr>`).join("")}</table>` : ""}
-      </li>`).join("")}
-    </ol>`).join("");
+function adim(a, simdi) {
+  return `<li class="adim${simdi ? " simdi" : ""}">
+    ${simdi ? `<p class="etiket">Şimdi</p>` : ""}
+    <p class="adim-bas">${a.no}. ${kacis(a.baslik)}${a.saniye ? `<span class="sure">${sureYaz(a.saniye)}</span>` : ""}</p>
+    ${a.metin ? `<p class="ipucu">${kacis(a.metin)}</p>` : ""}
+    ${kullanilacaklar(a)}
+    ${a.eylemler.length ? `<table class="eylemler">${a.eylemler.map((e) =>
+      `<tr><td class="miktar">${sureYaz(e.saniye)}</td><td>${kacis(e.metin)}</td></tr>`).join("")}</table>` : ""}
+  </li>`;
+}
+
+// Yapılmamış adımlar en üstte, ilki "Şimdi"; yapılanlar sayfanın en altında tek açılır başlıkta.
+function adimlar(t) {
+  const tum = t.bolumler.flatMap((b) => b.gruplar.filter((g) => g.tur === "adim").flatMap((g) => g.ogeler));
+  const kalan = tum.filter((a) => !a.yapildi);
+  const yapilan = tum.filter((a) => a.yapildi);
+  return {
+    siradaki: kalan.length ? `<h2>Sıradaki</h2><ol class="adimlar">${kalan.map((a, i) => adim(a, i === 0)).join("")}</ol>` : "",
+    yapilanlar: yapilan.length ? `<details class="yapilanlar"><summary>✅ Yapılanlar (${yapilan.length})</summary>
+      <ol class="adimlar">${yapilan.map((a) => adim(a, false)).join("")}</ol></details>` : "",
+  };
 }
 
 function cizelge(b) {
@@ -130,13 +144,15 @@ function cizelge(b) {
 function tarif(t) {
   baharatlar = new Set(t.bolumler.flatMap((b) => b.gruplar.filter(baharatGrubu).flatMap((g) => g.ogeler.map((o) => yalin(o.ad)))));
   const notlar = t.bolumler.flatMap((b) => b.notlar.filter(Boolean));
+  const { siradaki, yapilanlar } = adimlar(t);
   return `<article>
     <h1>${kacis(t.emoji)} ${kacis(t.baslik)}</h1>
     <p class="bilgi">${[t.kisi && `${t.kisi} kişilik`, t.sure && `~${t.sure} dk`, t.kod].filter(Boolean).map(kacis).join(" · ")}</p>
-    ${notlar.length ? `<ul class="notlar">${notlar.map((n) => `<li>${kacis(n)}</li>`).join("")}</ul>` : ""}
+    ${siradaki}
     ${malzemeTablosu(t)}
-    ${t.bolumler.map(adimlar).join("")}
+    ${notlar.length ? `<h2>Notlar</h2><ul class="notlar">${notlar.map((n) => `<li>${kacis(n)}</li>`).join("")}</ul>` : ""}
     ${t.bolumler.map(cizelge).join("")}
+    ${yapilanlar}
   </article>`;
 }
 
