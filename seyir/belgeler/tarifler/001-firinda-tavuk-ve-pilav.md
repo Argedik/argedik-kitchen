@@ -4,7 +4,7 @@ kod: TRF-001
 baslik: "Fırında Soslu Baget ve Tereyağlı Pilav"
 durum: kabul
 tarih: 2026-09-23
-surum: 6
+surum: 7
 emoji: "🍗"
 kisi: 2
 sure: 102
@@ -16,7 +16,7 @@ ozet: "Maden suyu ve salçalı sosa yatırılmış bagetler; patates, soğan, ka
 > Fırın ayarı: alt-üst fanlı, 180°C. Fan ısıyı her yere eşit dağıttığı için normal fırından 20°C düşük yeterli; 200°C'de bagetin dışı yanar, içi çiğ kalır.
 > Tepsi fırının orta kademesine takılır; tepsiye yağlı kağıt serilir, malzemeler kağıdın üstüne dizilir. Üstü hiçbir şeyle örtülmez.
 > Pişerken sos: 20. dakikada bagetler çevrilip üstlerine ayrı hazırlanan sürme sosu sürülür, 38. dakikada tekrar çevrilip tepsinin suyu gezdirilir. Tavuğun yattığı sos sürülmez, çünkü çiğ tavuğa değmiştir.
-> Maden suyu eti yumuşatır. Salça renk ve hafif tatlılık verir. Yağ baharatı etin üstünde tutar, kızarmasını sağlar. Kimyon ve kekik tavukla en iyi anlaşan iki baharattır.
+> Maden suyu eti yumuşatır. Salça renk ve hafif tatlılık verir. Yağ baharatı etin üstünde tutar, kızarmasını sağlar. Kimyon ve kekik tavukla en iyi anlaşan iki baharattır. Kaşar isteğe bağlıdır: son 5 dakikada yalnız patateslerin üstüne serpilir, bagete konmaz ki sosun tadını örtmesin.
 
 ### Alışveriş Listesi
 - 6 adet | tavuk baget (~700 g)
@@ -25,7 +25,6 @@ ozet: "Maden suyu ve salçalı sosa yatırılmış bagetler; patates, soğan, ka
 - 1 adet | kapya biber
 - 1 adet | orta boy domates
 - ¼ demet | maydanoz
-- 2 diş | sarımsak
 - ½ su bardağı | sade maden suyu
 - 5 yemek kaşığı | zeytinyağı (3'ü marine sosuna, 1'i sebzelere, 1'i sürme sosuna)
 - 1 tepeleme + 1 silme yemek kaşığı | biber salçası (tepelemesi marine sosuna, silmesi sürme sosuna)
@@ -39,10 +38,10 @@ ozet: "Maden suyu ve salçalı sosa yatırılmış bagetler; patates, soğan, ka
 - 2 yemek kaşığı | sıcak su (sürme sosuna)
 - 1 parça | yağlı kağıt (tepsinin tabanı kadar)
 - 1 adet | fırın tepsisi
+- 2 tepeleme yemek kaşığı | rendelenmiş kaşar (isteğe bağlı, patateslerin üstüne)
 
 ### Adımlar
 1. Marine sosunu hazırla
-   + 2 diş | sarımsak
    + 3 yemek kaşığı | zeytinyağı
    + 1 tepeleme yemek kaşığı | biber salçası
    + 1 silme tatlı kaşığı | tuz
@@ -52,8 +51,7 @@ ozet: "Maden suyu ve salçalı sosa yatırılmış bagetler; patates, soğan, ka
    + 1 silme çay kaşığı | toz kırmızı biber
    + ½ silme çay kaşığı | karabiber
    + ½ su bardağı | sade maden suyu
-   * 1 dk | Sarımsakları soy, ez ya da rendele.
-   * 30 sn | Derin bir kaba zeytinyağını, salçayı ve sarımsağı koy.
+   * 30 sn | Derin bir kaba zeytinyağını ve salçayı koy.
    * 30 sn | Tuzu ve bütün baharatları üstüne ekle.
    * 2 dk | Çatalla salça tamamen eriyene kadar çırp.
    * 1 dk | Maden suyunu yavaşça dök, köpürünce bir kez karıştır.
@@ -111,9 +109,12 @@ ozet: "Maden suyu ve salçalı sosa yatırılmış bagetler; patates, soğan, ka
    * 15 dk | Pişir.
 10. Tekrar çevir, kızart
    + 8. adımdan kalan | sürme sosu
+   + 2 tepeleme yemek kaşığı | rendelenmiş kaşar (isteğe bağlı)
    * 30 sn | Tepsiyi çıkar, bagetleri derisi üste gelecek şekilde geri çevir.
    * 1 dk | Kalan sürme sosunu bagetlere sür, tepsinin dibindeki suyu kaşıkla sebzelerin üstüne gezdir.
-   * 12 dk | Tepsiyi geri tak, bagetler koyu kırmızı renk alana kadar pişir.
+   * 7 dk | Tepsiyi geri tak, pişir.
+   * 30 sn | Tepsiyi çıkar, kaşarı yalnızca patateslerin üstüne serp, bagetlere koyma. Tepsiyi geri tak.
+   * 5 dk | Kaşar eriyip bagetler koyu kırmızı renk alana kadar pişir.
    * 30 sn | Çatalla kemik dibinden del: su berrak geliyorsa pişmiştir, pembeyse 5 dk daha tut.
 11. Dinlendir, maydanozu serp
    + ¼ demet | maydanoz
