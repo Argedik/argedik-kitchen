@@ -4,16 +4,16 @@ kod: TRF-001
 baslik: "Fırında Soslu Baget ve Tereyağlı Pilav"
 durum: kabul
 tarih: 2026-09-23
-surum: 2
+surum: 3
 emoji: "🍗"
 kisi: 2
 sure: 90
-ozet: "Maden suyu, salça ve ketçaplı sosa yatırılmış bagetler; patates, soğan, kapya biber ve domatesle aynı tepside. Yanında tereyağlı pirinç pilavı."
+ozet: "Maden suyu ve salçalı sosa yatırılmış bagetler; patates, soğan, kapya biber ve domatesle aynı tepside. Yanında tereyağlı pirinç pilavı."
 ---
 
 ## 🍗 Soslu Baget
 
-> Maden suyu eti yumuşatır. Salça ve ketçap renk ve hafif tatlılık verir. Yağ baharatı etin üstünde tutar, fırında kızarmasını sağlar. Kimyon ve kekik tavukla en iyi anlaşan iki baharattır.
+> Maden suyu eti yumuşatır. Salça renk ve hafif tatlılık verir. Yağ baharatı etin üstünde tutar, fırında kızarmasını sağlar. Kimyon ve kekik tavukla en iyi anlaşan iki baharattır.
 > Vaktin varsa bagetleri sosla buzdolabında 2 saat beklet, daha da lezzetli olur. En az 30 dakika şart.
 > Maydanozu fırına koyma, pişince kararır. Pişince üstüne taze serp.
 
@@ -31,7 +31,6 @@ ozet: "Maden suyu, salça ve ketçaplı sosa yatırılmış bagetler; patates, s
 - ½ su bardağı | sade maden suyu
 - 3 yemek kaşığı | zeytinyağı
 - 1 tepeleme yemek kaşığı | biber salçası
-- 2 yemek kaşığı | ketçap
 - 2 diş | sarımsak (ezilmiş)
 - 1 silme tatlı kaşığı | tuz
 - 1 silme tatlı kaşığı | pul biber
@@ -47,7 +46,7 @@ ozet: "Maden suyu, salça ve ketçaplı sosa yatırılmış bagetler; patates, s
 4. Fırını ısıt (15 dk) — Bekleme bitmeden 15 dakika önce fırını alt-üst ayarında 200°C'ye getir.
 5. Sebzeleri doğra (8 dk) — Patatesi soyup elma dilimi gibi 8'e böl. Soğanı 4'e bölüp katlarını ayır. Biberin çekirdeğini çıkarıp iri doğra. Domatesi 6'ya böl.
 6. Tepsiye diz (3 dk) — Bagetleri kaptan al. Patates, soğan ve biberi kapta kalan sosa ve 1 yemek kaşığı zeytinyağına bula, tepsiye yay, domatesleri aralara koy. Bagetleri sebzelerin üstüne diz. Sıcak suyu tepsinin kenarından dök.
-7. Folyo kapalı pişir (25 dk) — Tepsiyi alüminyum folyoyla kapat, orta rafa koy. Ketçap bu sırada yanmaz, patates buharda yumuşar.
+7. Folyo kapalı pişir (25 dk) — Tepsiyi alüminyum folyoyla kapat, orta rafa koy. Salça bu sırada yanmaz, patates buharda yumuşar.
 8. Folyoyu aç, kızart (20 dk) — Folyoyu kaldır. 10. dakikada tepsideki suyu kaşıkla bagetlerin üstüne gezdir. Bagetler koyu kırmızı renk alınca hazırdır. Çatalla del: kemik dibinden berrak su geliyorsa pişmiştir, pembeyse 5 dk daha tut.
 9. Dinlendir, maydanozu serp (5 dk) — Fırından çıkar, 5 dakika beklet. Maydanozu ince kıyıp üstüne serp.
 
