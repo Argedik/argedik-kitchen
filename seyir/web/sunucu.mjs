@@ -44,7 +44,17 @@ function ayristir(metin, slug) {
     } else if (grup && (m = satir.match(/^\d+\.\s+(.+?)(?:\s*\(([^)]*(?:dk|sn))\))?(?:\s*[—-]\s*(.+))?$/))) {
       // Adım: "1. Başlık" + isteğe bağlı "(N dk)" ve "— ipucu". Süre verilmezse eylemlerin toplamıdır.
       grup.tur = "adim";
-      grup.ogeler.push({ baslik: m[1], saniye: m[2] ? saniye(m[2]) : 0, metin: m[3] ?? "", malzemeler: [], eylemler: [] });
+      // "[x] " ile başlayan adım yapılmıştır: sitede en alttaki "Yapılanlar" başlığına iner.
+      const yapildi = /^\[x\]\s*/i.test(m[1]);
+      grup.ogeler.push({
+        no: Number(satir.match(/^\d+/)[0]),
+        baslik: m[1].replace(/^\[x\]\s*/i, ""),
+        yapildi,
+        saniye: m[2] ? saniye(m[2]) : 0,
+        metin: m[3] ?? "",
+        malzemeler: [],
+        eylemler: [],
+      });
     } else if (grup?.tur === "adim" && (m = satir.match(/^\s+\+\s+(.+?)\s*\|\s*(.+)/))) {
       grup.ogeler.at(-1).malzemeler.push({ miktar: m[1], ad: m[2] });
     } else if (grup?.tur === "adim" && (m = satir.match(/^\s+\*\s+(.+?)\s*\|\s*(.+)/))) {
