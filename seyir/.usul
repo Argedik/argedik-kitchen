@@ -1,0 +1,8 @@
+{
+  "usul": "seyir/1.4",
+  "onek": "TRF",
+  "halkalar": [],
+  "proje": "Argedik Mutfak",
+  "port": 5280,
+  "turler": ["tarifler"]
+}
