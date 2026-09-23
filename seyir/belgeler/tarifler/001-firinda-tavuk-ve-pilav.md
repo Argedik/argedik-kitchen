@@ -4,7 +4,7 @@ kod: TRF-001
 baslik: "Fırında Soslu Baget ve Tereyağlı Pilav"
 durum: kabul
 tarih: 2026-09-23
-surum: 4
+surum: 5
 emoji: "🍗"
 kisi: 2
 sure: 100
@@ -36,6 +36,7 @@ ozet: "Maden suyu ve salçalı sosa yatırılmış bagetler; patates, soğan, ka
 - ½ silme çay kaşığı | karabiber
 - ¼ su bardağı | sıcak su
 - 1 parça | alüminyum folyo (tepsiyi örtecek kadar)
+- 1 parça | yağlı kağıt (tepsinin tabanı kadar)
 
 ### Adımlar
 1. Marine sosunu hazırla
@@ -61,8 +62,8 @@ ozet: "Maden suyu ve salçalı sosa yatırılmış bagetler; patates, soğan, ka
    * 2 dk | Her bagetin iki yüzüne bıçakla kemiğe kadar 2–3 çizik at.
    * 2 dk | Bagetleri sosa at, sosu elinle çiziklerin içine ov.
 3. Sosta beklet — Bu sırada pilavın 1. adımını yap.
-   + 1 adet | kap kapağı ya da streç film
-   * 30 sn | Kabın üstünü kapat.
+   + 1 adet | kabın kapağı ya da büyük bir tabak
+   * 30 sn | Kabın kapağını kapat; kapağı yoksa üstüne büyük bir tabağı ters kapat.
    * 30 dk | Tezgâhta beklet. Vaktin varsa buzdolabında 2 saate kadar tutabilirsin.
 4. Fırını ısıt — Beklemenin son 10 dakikasında başla.
    * 30 sn | Fırının içindeki tepsiyi ve teli çıkar, teli orta rafa geri tak.
@@ -78,13 +79,15 @@ ozet: "Maden suyu ve salçalı sosa yatırılmış bagetler; patates, soğan, ka
    * 1 dk | Biberin sapını ve çekirdeğini çıkar, 6 parçaya böl.
    * 1 dk | Domatesi 6'ya böl, ayrı bir tabağa koy.
 6. Tepsiye diz
+   + 1 parça | yağlı kağıt
    + 1 yemek kaşığı | zeytinyağı
    + ¼ su bardağı | sıcak su
    + 6 adet | soslu baget
    + 5. adımdaki | sebzeler
    * 1 dk | Bagetleri kaptan alıp bir tabağa koy; sos kapta kalsın.
    * 1 dk | Patates, soğan ve biberi kapta kalan sosa ve 1 yemek kaşığı zeytinyağına bula.
-   * 1 dk | Sebzeleri tepsiye tek kat yay, domatesleri aralara koy.
+   * 30 sn | Tepsiye yağlı kağıdı ser, kenarlarını tepsinin iç duvarlarına kaldır ki su taşmasın.
+   * 1 dk | Sebzeleri yağlı kağıdın üstüne tek kat yay, domatesleri aralara koy.
    * 30 sn | Bagetleri aralarında boşluk kalacak şekilde sebzelerin üstüne diz.
    * 30 sn | Sıcak suyu tepsinin kenarından dök.
 7. Folyo kapalı pişir
