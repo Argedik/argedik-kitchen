@@ -158,6 +158,25 @@ h3 { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: u
 .adim-bas b { display: block; font-size: 17px; line-height: 1.3; }
 .adim-bas p { margin: 6px 0 0; color: var(--soluk); font-size: 15px; }
 .sure { display: inline-block; margin-top: 4px; font-size: 13px; font-weight: 700; color: var(--altin); }
+.kullan { margin: 12px 0 0; padding: 10px 12px; border-radius: 12px; background: var(--yuzey-2); }
+.alt-baslik { display: block; font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--soluk); margin-bottom: 4px; }
+.kullan ul { margin: 0; padding: 0 0 0 18px; font-size: 15px; }
+.kullan li { padding: 2px 0; }
+.eylemler { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 6px; }
+.eylem { display: flex; gap: 8px; align-items: stretch; }
+.eylem-sure {
+  flex: 0 0 auto; min-width: 84px; min-height: 44px; padding: 6px 10px; border-radius: 10px;
+  border: 1px solid var(--altin); background: none; color: var(--altin);
+  font-size: 13.5px; font-weight: 700; white-space: nowrap; cursor: pointer;
+}
+.eylem-sure.sayiyor { background: var(--vurgu); border-color: var(--vurgu); color: #fff; }
+.eylem-metin {
+  flex: 1; min-width: 0; min-height: 44px; padding: 8px 10px; border-radius: 10px; border: 0;
+  background: none; text-align: left; font-size: 15px; line-height: 1.4; cursor: pointer;
+}
+.eylem-metin:active { background: var(--yuzey-2); }
+.eylem.yapildi .eylem-metin { opacity: .45; text-decoration: line-through; }
+.eylem.yapildi .eylem-sure { opacity: .45; }
 .adim-alt { display: flex; gap: 8px; margin-top: 12px; }
 .dugme {
   flex: 1; min-height: 44px; border-radius: 12px; border: 1px solid var(--cizgi);
@@ -182,7 +201,7 @@ h3 { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: u
   background: var(--murekkep); color: var(--zemin); display: none;
 }
 .sayaclar.acik { display: block; }
-.sayaclar .kap { padding: 0; display: grid; gap: 8px; }
+.sayaclar .kap { padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
 .sayac { display: flex; align-items: center; gap: 10px; }
 .sayac .ad { flex: 1; min-width: 0; font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sayac .kalan { font: 700 22px/1 ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric: tabular-nums; }
@@ -296,9 +315,11 @@ function tarifSayfasi(t) {
     d.addEventListener("click", () => { degistir(iz(t), d.dataset.isaret); tarifSayfasi(t); }));
   $("#ana").querySelectorAll("[data-baslat]").forEach((d) =>
     d.addEventListener("click", () => {
-      const [bi, gi, oi] = d.dataset.baslat.split(".").map(Number);
+      // "bi.gi.oi" adımın tamamı, "bi.gi.oi.ei" tek bir eylem için sayaç kurar.
+      const [bi, gi, oi, ei] = d.dataset.baslat.split(".").map(Number);
       const a = t.bolumler[bi].gruplar[gi].ogeler[oi];
-      sayacBaslat(`${t.slug}:${d.dataset.baslat}`, `${a.baslik}`, a.sure);
+      const e = a.eylemler?.[ei];
+      sayacBaslat(`${t.slug}:${d.dataset.baslat}`, e ? `${oi + 1}. ${a.baslik} · ${e.metin}` : `${oi + 1}. ${a.baslik}`, e ? e.saniye : a.saniye);
       tarifSayfasi(t);
     }));
   $("[data-sifirla]").addEventListener("click", () => {
@@ -315,19 +336,34 @@ function grupCiz(t, bi, g, gi) {
     return `<h3>${kacis(g.baslik)}</h3><ol class="adimlar">${g.ogeler.map((a, oi) => {
       const k = anahtar(oi);
       const bitti = isaretli(iz(t), "a:" + k);
-      const calisan = sayaclar.some((s) => s.id === `${t.slug}:${k}`);
+      const calisiyor = (id) => sayaclar.some((s) => s.id === `${t.slug}:${id}`);
+      const calisan = calisiyor(k) || a.eylemler.some((_, ei) => calisiyor(`${k}.${ei}`));
+      const eylemVar = a.eylemler.length > 0;
       return `<li class="adim${bitti ? " bitti" : ""}${calisan ? " caliyor" : ""}">
         <div class="adim-bas">
           <span class="no">${bitti ? "✓" : oi + 1}</span>
           <div class="govde">
             <b>${kacis(a.baslik)}</b>
-            <span class="sure">⏱ ${kacis(a.sureMetin)}</span>
-            <p>${kacis(a.metin)}</p>
+            ${a.saniye ? `<span class="sure">⏱ toplam ${sureYaz(a.saniye)}</span>` : ""}
+            ${a.metin ? `<p>${kacis(a.metin)}</p>` : ""}
           </div>
         </div>
+        ${a.malzemeler.length ? `<div class="kullan">
+          <span class="alt-baslik">Kullanılacaklar</span>
+          <ul>${a.malzemeler.map((m) => `<li><b>${kacis(m.miktar)}</b> ${kacis(m.ad)}</li>`).join("")}</ul>
+        </div>` : ""}
+        ${eylemVar ? `<ol class="eylemler">${a.eylemler.map((e, ei) => {
+          const ek = `${k}.${ei}`;
+          const yapildi = isaretli(iz(t), "e:" + ek);
+          const sayiyor = calisiyor(ek);
+          return `<li class="eylem${yapildi ? " yapildi" : ""}">
+            <button class="eylem-sure${sayiyor ? " sayiyor" : ""}" data-baslat="${ek}" aria-label="${sureYaz(e.saniye)} sayaç başlat">${sayiyor ? "↻" : "▶"} ${sureYaz(e.saniye)}</button>
+            <button class="eylem-metin" data-isaret="e:${ek}" aria-pressed="${yapildi}">${kacis(e.metin)}</button>
+          </li>`;
+        }).join("")}</ol>` : ""}
         <div class="adim-alt">
-          ${a.sure ? `<button class="dugme${bitti || calisan ? "" : " ana"}" data-baslat="${k}">${calisan ? "↻ Yeniden başlat" : `▶ ${a.sure} dk sayaç`}</button>` : ""}
-          <button class="dugme" data-isaret="a:${k}" aria-pressed="${bitti}">${bitti ? "Geri al" : "✓ Yaptım"}</button>
+          ${!eylemVar && a.saniye ? `<button class="dugme${bitti || calisan ? "" : " ana"}" data-baslat="${k}">${calisan ? "↻ Yeniden başlat" : `▶ ${sureYaz(a.saniye)} sayaç`}</button>` : ""}
+          <button class="dugme${eylemVar && !bitti ? " ana" : ""}" data-isaret="a:${k}" aria-pressed="${bitti}">${bitti ? "Geri al" : "✓ Adımı bitirdim"}</button>
         </div>
       </li>`;
     }).join("")}</ol>`;
@@ -349,10 +385,14 @@ function grupCiz(t, bi, g, gi) {
 
 // ---- Sayaçlar: bitiş anı saklanır, sayfa yenilense de doğru kalan süre gösterilir.
 let ses = null;
-function sayacBaslat(id, ad, dk) {
+function sureYaz(sn) {
+  const dk = Math.floor(sn / 60), s = sn % 60;
+  return dk && s ? `${dk} dk ${s} sn` : dk ? `${dk} dk` : `${s} sn`;
+}
+function sayacBaslat(id, ad, sn) {
   try { ses = ses || new (window.AudioContext || window.webkitAudioContext)(); ses.resume(); } catch {}
   sayaclar = sayaclar.filter((s) => s.id !== id);
-  sayaclar.push({ id, ad, bitis: Date.now() + dk * 60000, caldi: false });
+  sayaclar.push({ id, ad, bitis: Date.now() + sn * 1000, caldi: false });
   depo.yaz("seyir.mutfak.sayac", sayaclar);
   sayacCiz();
 }
