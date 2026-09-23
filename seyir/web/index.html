@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f1e8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1814" media="(prefers-color-scheme: dark)">
+<title>Seyir Mutfak</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍳</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --zemin: #f7f1e8;
+  --yuzey: #fffdf9;
+  --yuzey-2: #f1e8da;
+  --cizgi: #e4d7c3;
+  --murekkep: #2b231b;
+  --soluk: #7a6a58;
+  --vurgu: #c2551f;
+  --vurgu-yumusak: #fbe3d4;
+  --yesil: #3f7a4a;
+  --yesil-yumusak: #dcebdc;
+  --altin: #b0831c;
+  --golge: 0 1px 2px rgba(60, 40, 20, .06), 0 4px 16px rgba(60, 40, 20, .06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --zemin: #1c1814;
+    --yuzey: #262019;
+    --yuzey-2: #2f281f;
+    --cizgi: #3d342a;
+    --murekkep: #f3eadd;
+    --soluk: #b3a28d;
+    --vurgu: #ee8a52;
+    --vurgu-yumusak: #43291b;
+    --yesil: #86c290;
+    --yesil-yumusak: #1f3323;
+    --altin: #e0b551;
+    --golge: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 16px rgba(0, 0, 0, .25);
+  }
+}
+:root[data-theme="dark"] {
+  --zemin: #1c1814;
+  --yuzey: #262019;
+  --yuzey-2: #2f281f;
+  --cizgi: #3d342a;
+  --murekkep: #f3eadd;
+  --soluk: #b3a28d;
+  --vurgu: #ee8a52;
+  --vurgu-yumusak: #43291b;
+  --yesil: #86c290;
+  --yesil-yumusak: #1f3323;
+  --altin: #e0b551;
+  --golge: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 16px rgba(0, 0, 0, .25);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--zemin);
+  color: var(--murekkep);
+  font: 16px/1.55 Inter, system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  padding-bottom: calc(96px + env(safe-area-inset-bottom));
+}
+button { font: inherit; color: inherit; }
+.kap { max-width: 720px; margin: 0 auto; padding: 0 16px; }
+
+header.ust {
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--zemin) 88%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--cizgi);
+}
+header.ust .kap { display: flex; align-items: center; gap: 10px; height: 56px; }
+.marka { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; }
+.marka b { font: 700 20px/1 Fraunces, Georgia, serif; letter-spacing: -.2px; }
+.marka span { font-size: 12px; font-weight: 600; color: var(--soluk); }
+.geri {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; margin-left: -8px; border-radius: 12px;
+  text-decoration: none; color: var(--murekkep); font-size: 22px;
+}
+.geri:active { background: var(--yuzey-2); }
+
+h1 { font: 700 28px/1.15 Fraunces, Georgia, serif; letter-spacing: -.4px; margin: 20px 0 8px; }
+h2 { font: 700 21px/1.2 Fraunces, Georgia, serif; margin: 0; }
+h3 { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--soluk); margin: 24px 0 10px; }
+
+.kart-liste { display: grid; gap: 12px; margin: 20px 0; }
+.tarif-kart {
+  display: flex; gap: 14px; align-items: center; padding: 16px;
+  background: var(--yuzey); border: 1px solid var(--cizgi); border-radius: 18px;
+  box-shadow: var(--golge); text-decoration: none; color: inherit;
+}
+.tarif-kart:active { transform: scale(.99); }
+.tarif-kart .emoji { font-size: 40px; line-height: 1; }
+.tarif-kart .kod { font-size: 11.5px; font-weight: 700; color: var(--vurgu); letter-spacing: .04em; }
+.tarif-kart p { margin: 4px 0 8px; color: var(--soluk); font-size: 14px; }
+
+.etiketler { display: flex; flex-wrap: wrap; gap: 6px; }
+.etiket {
+  display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 999px;
+  background: var(--yuzey-2); font-size: 13px; font-weight: 600; white-space: nowrap;
+}
+.ozet { color: var(--soluk); margin: 0 0 12px; }
+
+.sekmeler {
+  position: sticky; top: 56px; z-index: 15; display: flex; gap: 6px; overflow-x: auto;
+  margin: 16px -16px 0; padding: 10px 16px; background: var(--zemin);
+  border-bottom: 1px solid var(--cizgi); scrollbar-width: none;
+}
+.sekmeler::-webkit-scrollbar { display: none; }
+.sekme {
+  flex: 0 0 auto; min-height: 40px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--cizgi);
+  background: var(--yuzey); font-size: 15px; font-weight: 600; cursor: pointer;
+}
+.sekme[aria-selected="true"] { background: var(--murekkep); color: var(--zemin); border-color: var(--murekkep); }
+
+.not {
+  margin: 20px 0 0; padding: 14px 16px; border-radius: 14px;
+  background: var(--vurgu-yumusak); font-size: 15px;
+}
+
+.malzeme-liste { list-style: none; margin: 0; padding: 0; background: var(--yuzey); border: 1px solid var(--cizgi); border-radius: 16px; overflow: hidden; }
+.malzeme-liste li + li { border-top: 1px solid var(--cizgi); }
+.malzeme {
+  display: flex; gap: 12px; align-items: flex-start; width: 100%; min-height: 52px; padding: 13px 14px;
+  background: none; border: 0; text-align: left; cursor: pointer;
+}
+.malzeme .kutu {
+  flex: 0 0 22px; height: 22px; margin-top: 1px; border-radius: 7px; border: 2px solid var(--cizgi);
+  display: grid; place-items: center; font-size: 13px; color: transparent;
+}
+.malzeme .miktar { font-weight: 700; }
+.malzeme .ad { color: var(--murekkep); }
+.malzeme[aria-pressed="true"] .kutu { background: var(--yesil); border-color: var(--yesil); color: var(--yuzey); }
+.malzeme[aria-pressed="true"] .yazi { opacity: .5; text-decoration: line-through; }
+
+.adimlar { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.adim {
+  background: var(--yuzey); border: 1px solid var(--cizgi); border-radius: 16px; padding: 14px;
+  box-shadow: var(--golge);
+}
+.adim.bitti { opacity: .55; box-shadow: none; }
+.adim.caliyor { border-color: var(--vurgu); box-shadow: 0 0 0 3px var(--vurgu-yumusak); }
+.adim-bas { display: flex; gap: 12px; align-items: flex-start; }
+.no {
+  flex: 0 0 34px; height: 34px; border-radius: 11px; display: grid; place-items: center;
+  background: var(--vurgu-yumusak); color: var(--vurgu); font-weight: 700; font-size: 15px;
+}
+.adim.bitti .no { background: var(--yesil-yumusak); color: var(--yesil); }
+.adim-bas .govde { flex: 1; min-width: 0; }
+.adim-bas b { display: block; font-size: 17px; line-height: 1.3; }
+.adim-bas p { margin: 6px 0 0; color: var(--soluk); font-size: 15px; }
+.sure { display: inline-block; margin-top: 4px; font-size: 13px; font-weight: 700; color: var(--altin); }
+.adim-alt { display: flex; gap: 8px; margin-top: 12px; }
+.dugme {
+  flex: 1; min-height: 44px; border-radius: 12px; border: 1px solid var(--cizgi);
+  background: var(--yuzey-2); font-weight: 600; font-size: 15px; cursor: pointer;
+}
+.dugme.ana { background: var(--vurgu); border-color: var(--vurgu); color: #fff; }
+.dugme:active { transform: scale(.98); }
+
+.sira { list-style: none; margin: 0; padding: 0 0 0 20px; border-left: 2px solid var(--cizgi); }
+.sira li { position: relative; padding: 0 0 18px 16px; }
+.sira li::before {
+  content: ""; position: absolute; left: -27px; top: 5px; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--zemin); border: 3px solid var(--vurgu);
+}
+.sira .zaman { display: block; font-weight: 700; color: var(--vurgu); font-size: 14px; }
+
+.sifirla { display: block; margin: 28px auto 0; background: none; border: 0; color: var(--soluk); font-size: 14px; text-decoration: underline; cursor: pointer; padding: 10px; }
+
+.sayaclar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  background: var(--murekkep); color: var(--zemin); display: none;
+}
+.sayaclar.acik { display: block; }
+.sayaclar .kap { padding: 0; display: grid; gap: 8px; }
+.sayac { display: flex; align-items: center; gap: 10px; }
+.sayac .ad { flex: 1; min-width: 0; font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sayac .kalan { font: 700 22px/1 ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric: tabular-nums; }
+.sayac.bitti .kalan { color: var(--vurgu); animation: yanip 1s steps(2) infinite; }
+.sayac button { min-width: 44px; min-height: 40px; border-radius: 10px; border: 0; background: color-mix(in srgb, var(--zemin) 18%, transparent); color: var(--zemin); font-weight: 700; cursor: pointer; }
+@keyframes yanip { 50% { opacity: .3; } }
+
+.bos { padding: 48px 0; text-align: center; color: var(--soluk); }
+@media (min-width: 600px) { h1 { font-size: 34px; } }
+@media (prefers-reduced-motion: reduce) { .sayac.bitti .kalan { animation: none; } }
+</style>
+</head>
+<body>
+<header class="ust"><div class="kap" id="ust"></div></header>
+<main class="kap" id="ana"><p class="bos">yükleniyor…</p></main>
+<div class="sayaclar" id="sayaclar" role="timer" aria-live="polite"><div class="kap" id="sayac-liste"></div></div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const kacis = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+
+// Tarayıcı deposu yalnız bu cihazdaki kolaylık içindir (işaretler, sayaçlar); okunamazsa boş başlar.
+const depo = {
+  al(k, v) { try { const x = localStorage.getItem(k); return x ? JSON.parse(x) : v; } catch { return v; } },
+  yaz(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+};
+
+let veri = null;
+let durum = depo.al("seyir.mutfak.isaret", {});   // { "<slug>": { "m:<anahtar>": true, "a:<anahtar>": true } }
+let sayaclar = depo.al("seyir.mutfak.sayac", []); // [{ id, ad, bitis, sure }]
+let sekme = depo.al("seyir.mutfak.sekme", {});    // { "<slug>": bolumIndex }
+
+const isaretli = (slug, k) => !!durum[slug]?.[k];
+function degistir(slug, k) {
+  durum[slug] = durum[slug] || {};
+  durum[slug][k] = !durum[slug][k];
+  depo.yaz("seyir.mutfak.isaret", durum);
+}
+
+async function yukle() {
+  const r = await fetch("veri.json", { cache: "no-store" });
+  veri = await r.json();
+  ciz();
+}
+
+function ciz() {
+  const m = location.hash.match(/^#\/tarif\/(.+)$/);
+  const tarif = m && veri.tarifler.find((t) => t.slug === decodeURIComponent(m[1]));
+  tarif ? tarifSayfasi(tarif) : anaSayfa();
+  sayacCiz();
+}
+
+function ustCiz(geri) {
+  $("#ust").innerHTML =
+    (geri ? `<a class="geri" href="#/" aria-label="Tariflere dön">‹</a>` : "") +
+    `<a class="marka" href="#/"><span style="font-size:22px">🍳</span><b>Seyir</b><span>${kacis(veri.proje)} tarif defteri</span></a>`;
+}
+
+function etiketler(t) {
+  return `<div class="etiketler">
+    ${t.kisi ? `<span class="etiket">👥 ${t.kisi} kişilik</span>` : ""}
+    ${t.sure ? `<span class="etiket">⏱ ~${t.sure} dk</span>` : ""}
+  </div>`;
+}
+
+function anaSayfa() {
+  ustCiz(false);
+  document.title = "Seyir Mutfak";
+  $("#ana").innerHTML = `
+    <h1>Tarifler</h1>
+    <div class="kart-liste">
+      ${veri.tarifler.map((t) => `
+        <a class="tarif-kart" href="#/tarif/${encodeURIComponent(t.slug)}">
+          <span class="emoji">${kacis(t.emoji || "🍽️")}</span>
+          <span>
+            <span class="kod">${kacis(t.kod)}</span>
+            <h2>${kacis(t.baslik)}</h2>
+            <p>${kacis(t.ozet)}</p>
+            ${etiketler(t)}
+          </span>
+        </a>`).join("") || `<p class="bos">Henüz tarif yok.</p>`}
+    </div>`;
+}
+
+function tarifSayfasi(t) {
+  ustCiz(true);
+  document.title = `${t.baslik} · Seyir Mutfak`;
+  const secili = Math.min(sekme[t.slug] ?? 0, t.bolumler.length - 1);
+  const b = t.bolumler[secili];
+  $("#ana").innerHTML = `
+    <h1>${kacis(t.emoji)} ${kacis(t.baslik)}</h1>
+    <p class="ozet">${kacis(t.ozet)}</p>
+    ${etiketler(t)}
+    <nav class="sekmeler" role="tablist">
+      ${t.bolumler.map((x, i) => `<button class="sekme" role="tab" aria-selected="${i === secili}" data-sekme="${i}">${kacis(x.baslik)}</button>`).join("")}
+    </nav>
+    ${b.notlar.length ? `<div class="not">${b.notlar.map(kacis).join("<br>")}</div>` : ""}
+    ${b.gruplar.map((g, gi) => grupCiz(t, secili, g, gi)).join("")}
+    <button class="sifirla" data-sifirla>İşaretleri sıfırla</button>`;
+
+  $("#ana").querySelectorAll("[data-sekme]").forEach((d) =>
+    d.addEventListener("click", () => {
+      sekme[t.slug] = Number(d.dataset.sekme);
+      depo.yaz("seyir.mutfak.sekme", sekme);
+      tarifSayfasi(t);
+      window.scrollTo({ top: $(".sekmeler").offsetTop - 56 });
+    }));
+  $("#ana").querySelectorAll("[data-isaret]").forEach((d) =>
+    d.addEventListener("click", () => { degistir(t.slug, d.dataset.isaret); tarifSayfasi(t); }));
+  $("#ana").querySelectorAll("[data-baslat]").forEach((d) =>
+    d.addEventListener("click", () => {
+      const [bi, gi, oi] = d.dataset.baslat.split(".").map(Number);
+      const a = t.bolumler[bi].gruplar[gi].ogeler[oi];
+      sayacBaslat(`${t.slug}:${d.dataset.baslat}`, `${a.baslik}`, a.sure);
+      tarifSayfasi(t);
+    }));
+  $("[data-sifirla]").addEventListener("click", () => {
+    if (!confirm("Bu tarifteki bütün işaretler kaldırılsın mı?")) return;
+    delete durum[t.slug];
+    depo.yaz("seyir.mutfak.isaret", durum);
+    tarifSayfasi(t);
+  });
+}
+
+function grupCiz(t, bi, g, gi) {
+  const anahtar = (oi) => `${bi}.${gi}.${oi}`;
+  if (g.tur === "adim") {
+    return `<h3>${kacis(g.baslik)}</h3><ol class="adimlar">${g.ogeler.map((a, oi) => {
+      const k = anahtar(oi);
+      const bitti = isaretli(t.slug, "a:" + k);
+      const calisan = sayaclar.some((s) => s.id === `${t.slug}:${k}`);
+      return `<li class="adim${bitti ? " bitti" : ""}${calisan ? " caliyor" : ""}">
+        <div class="adim-bas">
+          <span class="no">${bitti ? "✓" : oi + 1}</span>
+          <div class="govde">
+            <b>${kacis(a.baslik)}</b>
+            <span class="sure">⏱ ${kacis(a.sureMetin)}</span>
+            <p>${kacis(a.metin)}</p>
+          </div>
+        </div>
+        <div class="adim-alt">
+          ${a.sure ? `<button class="dugme${bitti || calisan ? "" : " ana"}" data-baslat="${k}">${calisan ? "↻ Yeniden başlat" : `▶ ${a.sure} dk sayaç`}</button>` : ""}
+          <button class="dugme" data-isaret="a:${k}" aria-pressed="${bitti}">${bitti ? "Geri al" : "✓ Yaptım"}</button>
+        </div>
+      </li>`;
+    }).join("")}</ol>`;
+  }
+  // Zaman çizelgesi: miktar sütunu dakika ise ("0. dk", "25–35. dk") çizelge olarak çizilir.
+  if (g.ogeler.every((o) => /dk$/.test(o.miktar))) {
+    return `<h3>${kacis(g.baslik)}</h3><ol class="sira">${g.ogeler.map((o) =>
+      `<li><span class="zaman">${kacis(o.miktar)}</span>${kacis(o.ad)}</li>`).join("")}</ol>`;
+  }
+  return `<h3>${kacis(g.baslik)}</h3><ul class="malzeme-liste">${g.ogeler.map((o, oi) => {
+    const k = "m:" + anahtar(oi);
+    const var_ = isaretli(t.slug, k);
+    return `<li><button class="malzeme" data-isaret="${k}" aria-pressed="${var_}">
+      <span class="kutu">✓</span>
+      <span class="yazi"><span class="miktar">${kacis(o.miktar)}</span> <span class="ad">${kacis(o.ad)}</span></span>
+    </button></li>`;
+  }).join("")}</ul>`;
+}
+
+// ---- Sayaçlar: bitiş anı saklanır, sayfa yenilense de doğru kalan süre gösterilir.
+let ses = null;
+function sayacBaslat(id, ad, dk) {
+  try { ses = ses || new (window.AudioContext || window.webkitAudioContext)(); ses.resume(); } catch {}
+  sayaclar = sayaclar.filter((s) => s.id !== id);
+  sayaclar.push({ id, ad, bitis: Date.now() + dk * 60000, caldi: false });
+  depo.yaz("seyir.mutfak.sayac", sayaclar);
+  sayacCiz();
+}
+function sayacKapat(id) {
+  sayaclar = sayaclar.filter((s) => s.id !== id);
+  depo.yaz("seyir.mutfak.sayac", sayaclar);
+  ciz();
+}
+function bip() {
+  if (!ses) return;
+  try {
+    [0, 0.35, 0.7].forEach((t) => {
+      const o = ses.createOscillator(), g = ses.createGain();
+      o.frequency.value = 880; o.connect(g); g.connect(ses.destination);
+      g.gain.setValueAtTime(0.25, ses.currentTime + t);
+      g.gain.exponentialRampToValueAtTime(0.001, ses.currentTime + t + 0.3);
+      o.start(ses.currentTime + t); o.stop(ses.currentTime + t + 0.3);
+    });
+  } catch {}
+}
+const ikiHane = (n) => String(n).padStart(2, "0");
+function sayacCiz() {
+  const kutu = $("#sayaclar");
+  kutu.classList.toggle("acik", sayaclar.length > 0);
+  $("#sayac-liste").innerHTML = sayaclar
+    .slice().sort((a, b) => a.bitis - b.bitis)
+    .map((s) => {
+      const kalan = Math.max(0, Math.round((s.bitis - Date.now()) / 1000));
+      return `<div class="sayac${kalan === 0 ? " bitti" : ""}">
+        <span class="ad">${kalan === 0 ? "🔔 " : ""}${kacis(s.ad)}</span>
+        <span class="kalan">${ikiHane(Math.floor(kalan / 60))}:${ikiHane(kalan % 60)}</span>
+        <button data-kapat="${kacis(s.id)}" aria-label="Sayacı kapat">✕</button>
+      </div>`;
+    }).join("");
+}
+// Liste her saniye yeniden çizilir; tıklama kapsayıcıdan yakalanır ki basış kaybolmasın.
+$("#sayac-liste").addEventListener("click", (e) => {
+  const d = e.target.closest("[data-kapat]");
+  if (d) sayacKapat(d.dataset.kapat);
+});
+setInterval(() => {
+  if (!sayaclar.length) return;
+  let degisti = false;
+  for (const s of sayaclar) {
+    if (!s.caldi && s.bitis <= Date.now()) {
+      s.caldi = true; degisti = true;
+      bip();
+      try { navigator.vibrate?.([400, 200, 400, 200, 400]); } catch {}
+    }
+  }
+  if (degisti) depo.yaz("seyir.mutfak.sayac", sayaclar);
+  sayacCiz();
+}, 1000);
+
+window.addEventListener("hashchange", () => { ciz(); window.scrollTo(0, 0); });
+yukle().catch((h) => { $("#ana").innerHTML = `<p class="bos">veri okunamadı: ${kacis(h.message)}</p>`; });
+</script>
+</body>
+</html>
